@@ -9,7 +9,8 @@ Design considerations for the 'beam_mux' implementation:
        up to the max burst, allowing for a contigious block of valid data samples going out to the selected dac.  I chose these fifos because they
        are very basic other than the addition of axi stream support which uses tvalid, tdata, tlast, tready.
 
-       To minimize latency, I chose to make a generically expandable set of parallel pairs of, given the ratio of burst lengths of 1:64, and the requirement to
+       To minimize latency, I chose to make a generically expandable set of parallel fifo (see block diagram) pairs of, given the ratio of burst lengths of 1:64,
+       and the requrement to
        release a contigious block of valid data samples to dacs, I decided it makes sense for a user to have the option to choose how many parallel pairs of fifos
        which can take on new bursts.  In my example I have set the parallel width to 4.  This means I can have a max length 1st burst, and 3 more minimum length bursts
        with minimal latency, in fact, there would be no latency other than the time to propogate through the fifo unless, you added a 5, 6, 7 ... addiotional minimum
